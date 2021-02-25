@@ -11,7 +11,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 // SearchOptions modifies the behavior of Search.

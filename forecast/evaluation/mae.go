@@ -6,7 +6,7 @@ import (
 	"context"
 	"math"
 
-	"github.com/rocketlaunchr/dataframe-go/forecast"
+	"github.com/padchin/dataframe-go/forecast"
 )
 
 // MeanAbsoluteError represents the mean absolute error.

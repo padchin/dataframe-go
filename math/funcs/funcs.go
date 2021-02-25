@@ -9,7 +9,7 @@ import (
 	"golang.org/x/xerrors"
 	"math"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 	"github.com/sandertv/go-formula/v2"
 )
 

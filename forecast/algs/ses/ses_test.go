@@ -7,8 +7,8 @@ import (
 	"math"
 	"testing"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
-	. "github.com/rocketlaunchr/dataframe-go/forecast/algs/ses"
+	"github.com/padchin/dataframe-go"
+	. "github.com/padchin/dataframe-go/forecast/algs/ses"
 )
 
 var ctx = context.Background()

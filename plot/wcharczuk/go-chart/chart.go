@@ -8,7 +8,7 @@ import (
 
 	"github.com/wcharczuk/go-chart"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 // S converts a SeriesFloat64 to a chart.Series for use with the "github.com/wcharczuk/go-chart" package.

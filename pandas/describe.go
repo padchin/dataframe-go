@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"strconv"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 // DescribeOutput contains statistical data for a DataFrame or Series.

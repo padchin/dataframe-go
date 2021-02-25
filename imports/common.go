@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"time"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 // GenericDataConverter is used to convert input data into a generic data type.

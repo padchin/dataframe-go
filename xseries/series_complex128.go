@@ -15,7 +15,7 @@ import (
 	"sync"
 
 	"github.com/olekukonko/tablewriter"
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 // SeriesComplex128 is used for series containing complex128 data.
@@ -305,7 +305,7 @@ func (s *SeriesComplex128) ValuesIterator(opts ...dataframe.ValuesOptions) func(
 
 	var (
 		row  int
-		step int = 1
+		step = 1
 	)
 
 	var dontReadLock bool

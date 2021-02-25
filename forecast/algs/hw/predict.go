@@ -5,8 +5,8 @@ package hw
 import (
 	"context"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
-	"github.com/rocketlaunchr/dataframe-go/forecast"
+	"github.com/padchin/dataframe-go"
+	"github.com/padchin/dataframe-go/forecast"
 )
 
 // Predict forecasts the next n values for the loaded data.
@@ -25,10 +25,10 @@ func (hw *HoltWinters) Predict(ctx context.Context, n uint) (*dataframe.SeriesFl
 	cnfdnce := []forecast.Confidence{}
 
 	var (
-		st        float64   = hw.tstate.smoothingLevel
-		seasonals []float64 = hw.tstate.seasonalComps
-		trnd      float64   = hw.tstate.trendLevel
-		period    int       = int(hw.cfg.Period)
+		st        = hw.tstate.smoothingLevel
+		seasonals = hw.tstate.seasonalComps
+		trnd      = hw.tstate.trendLevel
+		period    = int(hw.cfg.Period)
 	)
 
 	for i := uint(0); i < n; i++ {

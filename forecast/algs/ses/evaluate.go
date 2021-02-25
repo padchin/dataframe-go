@@ -5,8 +5,8 @@ package ses
 import (
 	"context"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
-	"github.com/rocketlaunchr/dataframe-go/forecast"
+	"github.com/padchin/dataframe-go"
+	"github.com/padchin/dataframe-go/forecast"
 )
 
 // Evaluate will measure the quality of the predicted values based on the evaluation calculation defined by evalFunc.

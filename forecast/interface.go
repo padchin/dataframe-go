@@ -6,7 +6,7 @@ import (
 	"context"
 	"errors"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 // ForecastingAlgorithm defines the methods that all forecasting algorithms must implement.

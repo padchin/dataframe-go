@@ -10,7 +10,7 @@ import (
 
 	"github.com/icza/gox/timex"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 var (

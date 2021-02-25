@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 	"github.com/rocketlaunchr/dbq/v2"
 )
 

@@ -5,7 +5,7 @@ package pandas
 import (
 	"context"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 // DropNil drops all rows that contain nil values.

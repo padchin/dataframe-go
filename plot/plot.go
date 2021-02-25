@@ -57,8 +57,8 @@ var (
 		document.addEventListener("DOMContentLoaded", onresize);
 	</script><body></html>`
 
-	htmlTemplate = template.Must(template.New("github.com/rocketlaunchr/dataframe-go/plot/html").Parse(titleHTML))
-	imgTemplate  = template.Must(template.New("github.com/rocketlaunchr/dataframe-go/plot/img").Parse(imgHTML))
+	htmlTemplate = template.Must(template.New("github.com/padchin/dataframe-go/plot/html").Parse(titleHTML))
+	imgTemplate  = template.Must(template.New("github.com/padchin/dataframe-go/plot/img").Parse(imgHTML))
 )
 
 type injectData struct {

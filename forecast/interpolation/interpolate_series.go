@@ -11,8 +11,8 @@ import (
 	"github.com/DzananGanic/numericalgo/interpolate/lagrange"
 	"github.com/cnkei/gospline"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
-	"github.com/rocketlaunchr/dataframe-go/utils"
+	"github.com/padchin/dataframe-go"
+	"github.com/padchin/dataframe-go/utils"
 )
 
 func interpolateSeriesFloat64(ctx context.Context, fs *dataframe.SeriesFloat64, opts InterpolateOptions) (*dataframe.OrderedMapIntFloat64, error) {
@@ -108,7 +108,7 @@ func interpolateSeriesFloat64(ctx context.Context, fs *dataframe.SeriesFloat64, 
 	// TODO: Check if there is only 1 non-nil value between start and end.
 
 	var (
-		startOfSeg int = start
+		startOfSeg = start
 
 		firstRow *int // row of first known value
 		lastRow  *int // row of last known value

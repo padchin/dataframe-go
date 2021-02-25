@@ -6,7 +6,7 @@ import (
 	"context"
 	"io"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 	"github.com/tealeg/xlsx/v3"
 )
 

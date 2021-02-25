@@ -7,7 +7,7 @@ import (
 	"golang.org/x/sync/errgroup"
 	"sync"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 func interpolateDataFrame(ctx context.Context, df *dataframe.DataFrame, opts InterpolateOptions) (map[interface{}]*dataframe.OrderedMapIntFloat64, error) {

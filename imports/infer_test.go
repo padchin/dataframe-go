@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 var ctx = context.Background()

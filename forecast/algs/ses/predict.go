@@ -5,8 +5,8 @@ package ses
 import (
 	"context"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
-	"github.com/rocketlaunchr/dataframe-go/forecast"
+	"github.com/padchin/dataframe-go"
+	"github.com/padchin/dataframe-go/forecast"
 )
 
 // Predict forecasts the next n values for the loaded data.

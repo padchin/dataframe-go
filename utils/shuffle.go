@@ -7,7 +7,7 @@ import (
 	"math/rand"
 	"time"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 func init() {

@@ -6,7 +6,7 @@ import (
 	"context"
 	"time"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 // NewSeriesTimeOptions sets how NewSeriesTime decides at which row to stop.

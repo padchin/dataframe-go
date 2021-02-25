@@ -7,7 +7,7 @@ import (
 	"encoding/csv"
 	"io"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 // CSVExportOptions contains options for ExportToCSV function.

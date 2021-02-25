@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 
 	jutils "github.com/juju/utils/v2"
 )
@@ -79,7 +79,7 @@ func LoadFromCSV(ctx context.Context, r io.ReadSeeker, options ...CSVLoadOptions
 		comment          rune
 		trimLeadingSpace bool
 
-		newR io.ReadSeeker = r
+		newR = r
 	)
 
 	if len(options) > 0 {

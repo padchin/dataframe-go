@@ -9,7 +9,7 @@ import (
 
 	"gonum.org/v1/gonum/stat"
 
-	dataframe "github.com/rocketlaunchr/dataframe-go"
+	"github.com/padchin/dataframe-go"
 )
 
 func describeSeries(ctx context.Context, s dataframe.Series, opts ...DescribeOptions) (DescribeOutput, error) {

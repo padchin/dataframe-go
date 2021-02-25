@@ -18,7 +18,7 @@ import (
 
 // CSVLoadOptions is likely to change.
 type CSVLoadOptions struct {
-
+	TimeFormatString string
 	// Comma is the field delimiter.
 	// The default value is ',' when CSVLoadOption is not provided.
 	// Comma must be a valid rune and must not be \r, \n,
@@ -73,6 +73,7 @@ type CSVLoadOptions struct {
 func LoadFromCSV(ctx context.Context, r io.ReadSeeker, options ...CSVLoadOptions) (*dataframe.DataFrame, error) {
 
 	var init *dataframe.SeriesInit
+	s_layout := time.RFC3339
 
 	var (
 		comma            rune
@@ -83,6 +84,7 @@ func LoadFromCSV(ctx context.Context, r io.ReadSeeker, options ...CSVLoadOptions
 	)
 
 	if len(options) > 0 {
+		s_layout = options[0].TimeFormatString
 		comma = options[0].Comma
 		if comma == 0 {
 			comma = ','
@@ -249,9 +251,8 @@ func LoadFromCSV(ctx context.Context, r io.ReadSeeker, options ...CSVLoadOptions
 						insertVals = append(insertVals, f)
 					case time.Time:
 						//2006-01-02T15:04:05Z07:00
-						const layout = "2006-01-02 15:04:05"
 						//t, err := time.Parse(time.RFC3339, v)
-						t, err := time.Parse(layout, v)
+						t, err := time.Parse(s_layout, v)
 						if err != nil {
 							// Assume unix timestamp
 							sec, err := strconv.ParseInt(v, 10, 64)

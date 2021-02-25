@@ -248,7 +248,10 @@ func LoadFromCSV(ctx context.Context, r io.ReadSeeker, options ...CSVLoadOptions
 						}
 						insertVals = append(insertVals, f)
 					case time.Time:
-						t, err := time.Parse(time.RFC3339, v)
+						//2006-01-02T15:04:05Z07:00
+						const layout = "2006-01-02 15:04:05"
+						//t, err := time.Parse(time.RFC3339, v)
+						t, err := time.Parse(layout, v)
 						if err != nil {
 							// Assume unix timestamp
 							sec, err := strconv.ParseInt(v, 10, 64)

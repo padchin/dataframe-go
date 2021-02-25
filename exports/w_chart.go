@@ -1,6 +1,6 @@
 // Copyright 2018-20 PJ Engineering and Business Solutions Pty. Ltd. All rights reserved.
 
-package chart
+package exports
 
 import (
 	"context"

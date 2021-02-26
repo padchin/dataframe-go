@@ -18,7 +18,8 @@ import (
 
 // CSVLoadOptions is likely to change.
 type CSVLoadOptions struct {
-	TimeFormatString string
+	TimeZoneCorrection int
+	TimeFormatString   string
 	// Comma is the field delimiter.
 	// The default value is ',' when CSVLoadOption is not provided.
 	// Comma must be a valid rune and must not be \r, \n,
@@ -73,8 +74,8 @@ type CSVLoadOptions struct {
 func LoadFromCSV(ctx context.Context, r io.ReadSeeker, options ...CSVLoadOptions) (*dataframe.DataFrame, error) {
 
 	var init *dataframe.SeriesInit
-	s_layout := time.RFC3339
-
+	s_layout := time.RFC3339 // default layout for parsing time
+	i_time_zone_correction := 0
 	var (
 		comma            rune
 		comment          rune
@@ -85,6 +86,7 @@ func LoadFromCSV(ctx context.Context, r io.ReadSeeker, options ...CSVLoadOptions
 
 	if len(options) > 0 {
 		s_layout = options[0].TimeFormatString
+		i_time_zone_correction = options[0].TimeZoneCorrection
 		comma = options[0].Comma
 		if comma == 0 {
 			comma = ','
@@ -259,9 +261,9 @@ func LoadFromCSV(ctx context.Context, r io.ReadSeeker, options ...CSVLoadOptions
 							if err != nil {
 								return nil, fmt.Errorf("can't force string: %s to time.Time (%s). row: %d field: %s", v, time.RFC3339, row-1, name)
 							}
-							insertVals = append(insertVals, time.Unix(sec, 0))
+							insertVals = append(insertVals, time.Unix(sec, 0).Add(time.Hour*time.Duration(i_time_zone_correction)))
 						} else {
-							insertVals = append(insertVals, t)
+							insertVals = append(insertVals, t.Add(time.Hour*time.Duration(i_time_zone_correction)))
 						}
 					case dataframe.NewSerieser:
 						insertVals = append(insertVals, v)

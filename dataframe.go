@@ -50,6 +50,46 @@ func NewDataFrame(se ...Series) *DataFrame {
 	return df
 }
 
+// Join объединяет исходную dataframe и новую. Все параметры должны совпадать.
+func (df *DataFrame) Join(dataframes ...*DataFrame) (*DataFrame, error) {
+	// проверка размерности матриц
+	for _, _dataframe := range dataframes {
+		if len(df.Names()) != len(_dataframe.Names()) {
+			err := errors.New("join error: number of columns don't match")
+			return nil, err
+		}
+		// проверка совпадения имен столбцов и типов столбцов
+
+		for i, v := range df.Names() {
+			if v != _dataframe.Names()[i] {
+				err := errors.New("join error: names of columns don't match")
+				return nil, err
+			}
+			if df.Series[i].Type() != _dataframe.Series[i].Type() {
+				err := errors.New("join error: types of columns don't match")
+				return nil, err
+			}
+		}
+		iter2 := _dataframe.ValuesIterator(ValuesOptions{
+			InitialRow:   0,
+			Step:         1,
+			DontReadLock: true,
+		})
+		for {
+			row, val, _ := iter2()
+			if row == nil {
+				break
+			}
+			var new_row []interface{}
+			for i := 0; i < len(df.Names()); i++ {
+				new_row = append(new_row, val[df.Names()[i]])
+			}
+			df.Append(nil, new_row...)
+		}
+	}
+	return df, nil
+}
+
 // NRows returns the number of rows of data.
 // Each series must contain the same number of rows.
 func (df *DataFrame) NRows(opts ...Options) int {
@@ -154,7 +194,7 @@ func (df *DataFrame) ValuesIterator(opts ...ValuesOptions) func(opts ...SeriesRe
 
 	var (
 		row  int
-		step int = 1
+		step = 1
 	)
 
 	var dontReadLock bool

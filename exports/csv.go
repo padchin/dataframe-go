@@ -3,16 +3,21 @@
 package exports
 
 import (
+	"bufio"
+	"compress/gzip"
 	"context"
 	"encoding/csv"
 	"io"
+	"log"
+	"os"
 
 	"github.com/padchin/dataframe-go"
 )
 
 // CSVExportOptions contains options for ExportToCSV function.
 type CSVExportOptions struct {
-
+	// Gzipped is used to set that resulting file will be compressed by GZIP
+	Gzipped bool
 	// NullString is used to set what nil values should be encoded to.
 	// Common options are NULL, \N, NaN, NA.
 	NullString *string
@@ -22,7 +27,7 @@ type CSVExportOptions struct {
 
 	// Separator is the field delimiter. A common option is ',', which is
 	// the default if CSVExportOptions is not provided.
-	Separator rune
+	Separator string
 
 	// UseCRLF determines the line terminator.
 	// When true, it is set to \r\n.
@@ -44,7 +49,7 @@ func ExportToCSV(ctx context.Context, w io.Writer, df *dataframe.DataFrame, opti
 	cw := csv.NewWriter(w)
 
 	if len(options) > 0 {
-		cw.Comma = options[0].Separator
+		cw.Comma = rune(options[0].Separator[0])
 		cw.UseCRLF = options[0].UseCRLF
 		r = options[0].Range
 		if options[0].NullString != nil {
@@ -109,5 +114,62 @@ func ExportToCSV(ctx context.Context, w io.Writer, df *dataframe.DataFrame, opti
 		return err
 	}
 
+	return nil
+}
+
+func CSVDump(ctx context.Context, df *dataframe.DataFrame, path string, options ...CSVExportOptions) error {
+	var gzipped bool
+	if len(options) > 0 {
+		gzipped = options[0].Gzipped
+	}
+	f, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		err = f.Close()
+		if err != nil {
+			log.Printf("CSVDump(): close file error: %v", err)
+			panic(err)
+		}
+	}()
+
+	if !gzipped {
+		buf := bufio.NewWriter(f)
+		defer func() {
+			err = buf.Flush()
+			if err != nil {
+				log.Printf("CSVDump(): flush error: %v", err)
+				panic(err)
+			}
+		}()
+		err = ExportToCSV(ctx, buf, df, options...)
+		if err != nil {
+			return err
+		}
+	} else {
+		buf := bufio.NewWriter(f)
+		defer func() {
+			err = buf.Flush()
+			if err != nil {
+				log.Printf("CSVDump(): flush error: %v", err)
+				panic(err)
+			}
+		}()
+
+		gz := gzip.NewWriter(buf)
+		defer func() {
+			err = gz.Close()
+			if err != nil {
+				log.Printf("CSVDump(): close file error: %v", err)
+				panic(err)
+			}
+		}()
+
+		err = ExportToCSV(ctx, gz, df, options...)
+		if err != nil {
+			return err
+		}
+	}
 	return nil
 }

@@ -27,7 +27,7 @@ type CSVExportOptions struct {
 
 	// Separator is the field delimiter. A common option is ',', which is
 	// the default if CSVExportOptions is not provided.
-	Separator string
+	Separator rune
 
 	// UseCRLF determines the line terminator.
 	// When true, it is set to \r\n.
@@ -49,7 +49,7 @@ func ExportToCSV(ctx context.Context, w io.Writer, df *dataframe.DataFrame, opti
 	cw := csv.NewWriter(w)
 
 	if len(options) > 0 {
-		cw.Comma = rune(options[0].Separator[0])
+		cw.Comma = options[0].Separator
 		cw.UseCRLF = options[0].UseCRLF
 		r = options[0].Range
 		if options[0].NullString != nil {

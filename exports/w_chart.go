@@ -6,7 +6,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/wcharczuk/go-chart"
+	"github.com/wcharczuk/go-chart/v2"
 
 	"github.com/padchin/dataframe-go"
 )
